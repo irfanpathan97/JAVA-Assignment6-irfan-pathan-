@@ -1,0 +1,294 @@
+1.    Create an immutable class called Person with final fields for name and age. Provide a constructor to initialize these fields, and make sure that once the object is created, the values cannot be changed.
+
+
+public final class Person {
+    private final String name;
+    private final int age;
+
+    
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    
+    public String getName() {
+        return name;
+    }
+
+    
+    public int getAge() {
+        return age;
+    }
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        Person person = new Person("Alice", 30);
+        System.out.println("Name: " + person.getName());
+        System.out.println("Age: " + person.getAge());
+    }
+}
+
+
+
+2.    Create an abstract class GeometricShape with abstract methods like area() and perimeter(). Then, create concrete subclasses like Circle,
+Rectangle, and Triangle that inherit from GeometricShape and implement the required methods.
+
+
+
+
+public abstract class GeometricShape {
+    
+    public abstract double area();
+
+   
+    public abstract double perimeter();
+}
+public class Circle extends GeometricShape {
+    private final double radius;
+
+    
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public double area() {
+        return Math.PI * radius * radius;
+    }
+
+    @Override
+    public double perimeter() {
+        return 2 * Math.PI * radius;
+    }
+}
+public class Rectangle extends GeometricShape {
+    private final double width;
+    private final double height;
+
+    
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    public double area() {
+        return width * height;
+    }
+
+    @Override
+    public double perimeter() {
+        return 2 * (width + height);
+    }
+}
+public class Triangle extends GeometricShape {
+    private final double sideA;
+    private final double sideB;
+    private final double sideC;
+
+    
+    public Triangle(double sideA, double sideB, double sideC) {
+        this.sideA = sideA;
+        this.sideB = sideB;
+        this.sideC = sideC;
+    }
+
+    @Override
+    public double area() {
+        // Using Heron's formula
+        double s = (sideA + sideB + sideC) / 2;
+        return Math.sqrt(s * (s - sideA) * (s - sideB) * (s - sideC));
+    }
+
+    @Override
+    public double perimeter() {
+        return sideA + sideB + sideC;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        GeometricShape circle = new Circle(5);
+        System.out.println("Circle Area: " + circle.area());
+        System.out.println("Circle Perimeter: " + circle.perimeter());
+
+        GeometricShape rectangle = new Rectangle(4, 6);
+        System.out.println("Rectangle Area: " + rectangle.area());
+        System.out.println("Rectangle Perimeter: " + rectangle.perimeter());
+
+        GeometricShape triangle = new Triangle(3, 4, 5);
+        System.out.println("Triangle Area: " + triangle.area());
+        System.out.println("Triangle Perimeter: " + triangle.perimeter());
+    }
+}
+
+
+
+
+3.Utilize an abstract class named Animal, featuring abstract methods sound() and move(), to design concrete subclasses such as Dog, Cat, and Bird that inherit from Animal and implement the necessary methods?
+
+
+
+public abstract class Animal {
+    
+    public abstract String sound();
+
+    
+    public abstract String move();
+}
+public class Dog extends Animal {
+    @Override
+    public String sound() {
+        return "Bark";
+    }
+
+    @Override
+    public String move() {
+        return "Runs on four legs";
+    }
+}
+public class Cat extends Animal {
+    @Override
+    public String sound() {
+        return "Meow";
+    }
+
+    @Override
+    public String move() {
+        return "Walks stealthily on four legs";
+    }
+}
+public class Bird extends Animal {
+    @Override
+    public String sound() {
+        return "Chirp";
+    }
+
+    @Override
+    public String move() {
+        return "Flies in the sky";
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Animal dog = new Dog();
+        System.out.println("Dog sound: " + dog.sound());
+        System.out.println("Dog movement: " + dog.move());
+
+        Animal cat = new Cat();
+        System.out.println("Cat sound: " + cat.sound());
+        System.out.println("Cat movement: " + cat.move());
+
+        Animal bird = new Bird();
+        System.out.println("Bird sound: " + bird.sound());
+        System.out.println("Bird movement: " + bird.move());
+    }
+}
+
+
+
+4.    Suppose a class 'A' has a static method to print "Parent". Its subclass 'B' also has a static method with the same name to print "Child". Now call this method by the objects of the two classes. Also, call this method by an object of the parent class referring to the child class i.e. A obj=new B()
+
+
+
+public class A {
+    public static void print() {
+        System.out.println("Parent");
+    }
+}
+public class B extends A {
+    public static void print() {
+        System.out.println("Child");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+       
+        A a = new A();
+        a.print();  // Output: Parent
+
+        
+        B b = new B();
+        b.print();  // Output: Child
+
+        
+        A obj = new B();
+        obj.print(); 
+    }
+}
+
+
+
+5.    Create classes for a Car and an Engine. The Car class should contain an instance of the Engine class. Implement methods to start and stop the car, and display engine details.
+
+
+public class Engine {
+    private String type;
+    private int horsepower;
+
+    
+    public Engine(String type, int horsepower) {
+        this.type = type;
+        this.horsepower = horsepower;
+    }
+
+    
+    public String getDetails() {
+        return "Engine Type: " + type + ", Horsepower: " + horsepower;
+    }
+}
+public class Car {
+    private Engine engine;
+    private boolean isRunning;
+
+   
+    public Car(Engine engine) {
+        this.engine = engine;
+        this.isRunning = false; 
+    }
+
+   
+    public void start() {
+        if (!isRunning) {
+            isRunning = true;
+            System.out.println("Car started.");
+        } else {
+            System.out.println("Car is already running.");
+        }
+    }
+
+    
+    public void stop() {
+        if (isRunning) {
+            isRunning = false;
+            System.out.println("Car stopped.");
+        } else {
+            System.out.println("Car is already stopped.");
+        }
+    }
+
+    
+    public void displayEngineDetails() {
+        System.out.println(engine.getDetails());
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+       
+        Engine engine = new Engine("V8", 450);
+
+        
+        Car car = new Car(engine);
+
+        
+        car.displayEngineDetails();
+
+        
+        car.start();
+
+        
+        car.stop();
+    }
+}
